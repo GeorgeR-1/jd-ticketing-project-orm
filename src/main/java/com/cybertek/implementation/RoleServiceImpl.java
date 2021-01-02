@@ -1,42 +1,34 @@
 package com.cybertek.implementation;
 
 import com.cybertek.dto.RoleDTO;
-import com.cybertek.dto.UserDTO;
+import com.cybertek.entity.Role;
+import com.cybertek.repository.RoleRepository;
 import com.cybertek.service.RoleService;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class RoleServiceImpl extends AbstractMapService<RoleDTO,Long> implements RoleService {
+public class RoleServiceImpl implements RoleService {
+
+    @Autowired
+    private RoleRepository roleRepository;
 
     @Override
-    public List<RoleDTO> findAll() {
-        return super.findAll();
+    public List<RoleDTO> listAllRoles() {
+
+        List<Role> list = roleRepository.findAll();
+
+        //convert to DTO and return it - why we need mapper
+
+        return null;
+
     }
 
     @Override
-    public RoleDTO save(RoleDTO object) {
-        return super.save(object.getId(),object);
-    }
-
-    @Override
-    public void update(RoleDTO object) {
-        super.update(object.getId(),object);
-    }
-
-    @Override
-    public void deleteById(Long id) {
-        super.deleteById(id);
-    }
-
-    @Override
-    public void delete(RoleDTO object) {
-        super.delete(object);
-    }
-
-    @Override
-    public RoleDTO findById(Long id) {
-        return super.findById(id);
+    public RoleDTO findById(long id) {
+        return null;
     }
 }
