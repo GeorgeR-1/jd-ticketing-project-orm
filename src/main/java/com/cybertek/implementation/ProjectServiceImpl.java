@@ -37,11 +37,12 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public void save(ProjectDTO dto) {
+    public Project save(ProjectDTO dto) {
         dto.setProjectStatus(Status.OPEN);
         Project obj = projectMapper.convertToEntity(dto);
         obj.setAssignedManager(userMapper.convertToEntity(dto.getAssignedManager()));
         Project project = projectRepository.save(obj);
+        return project;
     }
 
     @Override
