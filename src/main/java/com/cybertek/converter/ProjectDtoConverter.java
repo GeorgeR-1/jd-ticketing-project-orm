@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @ConfigurationPropertiesBinding
-public class ProjectDtoConverter extends Converter<String,ProjectDTO>{
+public class ProjectDtoConverter implements Converter<String,ProjectDTO>{
 
     @Autowired
     ProjectService projectService;
