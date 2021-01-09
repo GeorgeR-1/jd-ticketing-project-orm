@@ -93,6 +93,18 @@ public class ProjectController {
         return "/manager/project-status";
     }
 
+    @GetMapping("/manager/complete/{projectCode}")
+    public String manager_completed(@PathVariable("projectCode") String projectCode, Model model){
+
+        projectService.complete(projectCode);
+
+        return "redirect:/project/manager/complete";
+    }
+
+
+
+
+
 //    @GetMapping("/manager/complete/{projectCode}")
 //    public String completeProjectStatus(@PathVariable("projectCode") String projectCode){
 //        projectService.changeProjectStatusToComplete(projectService.findById(projectCode));
