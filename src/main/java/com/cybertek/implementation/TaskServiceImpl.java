@@ -112,12 +112,42 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public List<TaskDTO> listAllTaskByStatusIsNot(Status status) {
-        User user = userRepository.findByUserName("THANKS@CT.COM");
-        List<Task> list = taskRepository.findAllByTaskStatusIsNotAndAssignedEmployee(Status.COMPLETE, user);
+        User user = userRepository.findByUserName("tom@ct.com");
+        List<Task> list = taskRepository.findAllByTaskStatusIsNotAndAssignedEmployee(status, user);
 
         return list.stream().map(taskMapper::convertToDto).collect(Collectors.toList());
     }
 
+    @Override
+    public List<TaskDTO> listAllTaskByProjectManager() {
+
+        User user = userRepository.findByUserName("wedal");
+        List<Task> tasks = taskRepository.findAllByProjectAssignedManager(user);
+
+        return tasks.stream().map(taskMapper::convertToDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public void updateStatus(TaskDTO dto) {
+
+        Optional<Task> task = taskRepository.findById(dto.getId());
+
+        if (task.isPresent()){
+            task.get().setTaskStatus(dto.getTaskStatus());
+            taskRepository.save(task.get());
+        }
+
+    }
+
+    @Override
+    public List<TaskDTO> listAllTasksByStatus(Status status) {
+
+        User user = userRepository.findByUserName("tom@ct.com");
+        List<Task> list = taskRepository.findAllByTaskStatusAndAssignedEmployee(status,user);
+
+        return list.stream().map(taskMapper::convertToDto).collect(Collectors.toList());
+
+    }
 
 
 }

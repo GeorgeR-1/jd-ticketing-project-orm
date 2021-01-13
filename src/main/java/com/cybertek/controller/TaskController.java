@@ -86,6 +86,37 @@ public class TaskController {
         return "task/employee-tasks";
     }
 
+    @GetMapping("/employee/edit/{id}")
+    public String employee_update(@PathVariable("id")Long id, Model model){
+
+        TaskDTO task = taskService.findById(id);
+        List<TaskDTO> tasks = taskService.listAllTaskByStatusIsNot(Status.COMPLETE);
+
+        model.addAttribute("task",task);
+        model.addAttribute("users",userService.listAllByRole("employee"));
+        model.addAttribute("projects",projectService.listAllProjects());
+        model.addAttribute("tasks",tasks);
+        model.addAttribute("statuses",Status.values());
+
+        return "task/employee-update";
+
+    }
+
+    @PostMapping("/employee/update/{id}")
+    public String employee_update(@PathVariable("id") Long id, TaskDTO taskDTO){
+        taskService.updateStatus(taskDTO);
+        return "redirect:/task/employee";
+    }
+
+    @GetMapping("/employee/archive")
+    public String employee_archive(Model model){
+
+        List<TaskDTO> tasks = taskService.listAllTasksByStatus(Status.COMPLETE);
+        model.addAttribute("tasks",tasks);
+
+        return "task/employee-archive";
+    }
+
 
 //    @GetMapping("/list")
 //    public String showTaskList(Model model) {
