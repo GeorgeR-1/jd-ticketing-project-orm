@@ -1,6 +1,7 @@
 package com.cybertek.controller;
 
 import com.cybertek.dto.UserDTO;
+import com.cybertek.exception.TicketingProjectException;
 import com.cybertek.service.RoleService;
 import com.cybertek.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +55,7 @@ public class UserController {
     }
 
     @GetMapping("/delete/{username}")
-    public String deleteUser(@PathVariable("username") String username){
+    public String deleteUser(@PathVariable("username") String username) throws TicketingProjectException {
         userService.delete(username);
         return "redirect:/user/create";
     }
