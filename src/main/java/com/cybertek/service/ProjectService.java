@@ -2,6 +2,7 @@ package com.cybertek.service;
 
 import com.cybertek.dto.ProjectDTO;
 import com.cybertek.entity.Project;
+import com.cybertek.entity.User;
 
 import java.util.List;
 
@@ -17,5 +18,7 @@ public interface ProjectService {
     void complete(String projectCode);
 
     List<ProjectDTO> listAllProjectDetails();
+
+    List<ProjectDTO> realAllByAssignedManager(User user);
 
 }
